@@ -26,7 +26,20 @@
     lineinfile:
       destfile: /etc/kibana/kibana.yml
       regexp: 'elasticsearch.url:'
-      line: 'elasticsearch.url: "http://localhost:9200"'
+      line: 'elasticsearch.url: ["http://localhost:9200"]'
+
+  - name: Defining Elasticsearch username
+    lineinfile:
+      destfile: /etc/kibana/kibana.yml
+      regexp: 'elasticsearch.username:'
+      line: 'elasticsearch.username: "kibana_system"'
+
+
+  - name: Defining Elasticsearch password
+    lineinfile:
+      destfile: /etc/kibana/kibana.yml
+      regexp: 'elasticsearch.password:'
+      line: 'elasticsearch.password: "test123"'
 
   # Starting Kibana
 
@@ -34,5 +47,3 @@
     service:
       name: kibana
       state: started
-
-
