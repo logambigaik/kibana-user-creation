@@ -1,0 +1,57 @@
+#elasticsearch installation:
+#===========================
+- hosts: localhost
+  tasks:
+
+  - name: Add Elasticsearch apt key
+    yum:
+     name: "https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.9.3-x86_64.rpm"
+     state: present
+
+# Update Elasticsearch config file to allow access (to secure Elasticsearch, bind to 'localhost').
+
+  - name: Updating the config file to allow outside access
+    lineinfile:
+     destfile: /etc/elasticsearch/elasticsearch.yml
+     regexp: 'network.host:'
+     line: 'network.host: 0.0.0.0'
+
+# Update Elasticsearch port in config file
+
+  - name: Updating the port in config file
+    lineinfile:
+     destfile: /etc/elasticsearch/elasticsearch.yml
+     regexp: 'http.port:'
+     line: 'http.port: 9200'
+
+# Update Elasticsearch nodes in config file
+
+  - name: Updating the config file to allow outside access
+    lineinfile:
+     destfile: /etc/elasticsearch/elasticsearch.yml
+     regexp: 'discovery.type:'
+     line: 'discovery.type: single-node'
+
+# Update Elasticsearch xpack enabled in config file
+
+  - name: Updating the config file to allow outside access
+    lineinfile:
+     destfile: /etc/elasticsearch/elasticsearch.yml
+     regexp: 'xpack.security.enabled:'
+     line: 'xpack.security.enabled: true'
+
+# Update Elasticsearch xpack-ssl enabled in config file
+
+  - name: Updating the config file to allow outside access
+    lineinfile:
+     destfile: /etc/elasticsearch/elasticsearch.yml
+     regexp: 'xpack.security.transport.ssl.enabled:'
+     line: 'xpack.security.transport.ssl.enabled: true'
+
+
+
+# Start Elasticsearch
+  - name: Starting Elasticsearch
+    service:
+      name: elasticsearch
+      state: started
