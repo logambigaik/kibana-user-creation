@@ -11,7 +11,7 @@
 
 # Index creation of kibana with the help of KQL:
 
-#Sample PUT command:
+# Sample PUT command:
 
 ```
 
@@ -24,7 +24,7 @@ PUT /my-index-000001
 }
 ```
 
-#Sample GET method
+# Sample GET method
 
 ```
 GET /my-index-000001
@@ -76,9 +76,8 @@ curl -H Content-type:application/json -u elastic:test123 -XPUT http://18.130.54.
 ![image](https://user-images.githubusercontent.com/54719289/117687312-9446e780-b1af-11eb-8472-abd0d63128b8.png)
 
 ```
-or 
 
-# Curl Command with json for user creation
+# Curl Command with KQL in json file format - for user creation
 curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/_security/user/archu -d '@user.json'
 
 ```
@@ -86,7 +85,7 @@ curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54
 
 ```
 
-# With ansible:
+# With ansible for user creation:
 
 usercreation.yml
 ----------------
@@ -130,11 +129,4 @@ ansible-playbook -v usercreation.yml --syntax-check
 ansible-playbook -v usercreation.yml -e user="ganesh"
 ```
 ![image](https://user-images.githubusercontent.com/54719289/117688135-69a95e80-b1b0-11eb-884b-66b50fd18e48.png)
-
-
-
-
-
-
-
 
