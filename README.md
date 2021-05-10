@@ -1,9 +1,9 @@
 # kibana-user-creation
-'''
+```
  amazon-linux-extras install ansible2
  ansible-palybook -v ansible-elasticserach.yml
  ansible-palybook -v ansible-kibana.yml
- 
+ ```
 
 # Index creation of kibana with the help of KQL:
 
