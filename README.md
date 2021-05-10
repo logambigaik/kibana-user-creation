@@ -2,6 +2,10 @@
 ```
  amazon-linux-extras install ansible2
  ansible-palybook -v ansible-elasticserach.yml
+ 
+ cd /usr/share/elasticsearch
+./bin/elasticsearch-setup-passwords interactive
+
  ansible-palybook -v ansible-kibana.yml
  ```
 
