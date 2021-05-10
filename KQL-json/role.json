@@ -1,0 +1,20 @@
+{
+    "cluster": [ ],
+    "indices" : [ ],
+    "applications" : [
+      {
+        "application" : "kibana-.kibana",
+        "privileges" : [
+          "all"
+        ],
+        "resources" : [
+          "*"
+        ]
+      }
+    ],
+    "run_as" : [ "loga" ],
+    "metadata" : {
+       "intelligence" : 7
+     }
+}
+
