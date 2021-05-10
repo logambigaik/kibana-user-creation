@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  tasks:
+
+  - name: role creation
+    uri:
+         url: "http://18.130.54.13:9200/_security/role/{{ role }}"
+         user: "elastic"
+         password: "test123"
+         method: POST
+         body: "{{ lookup('file','role.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 200
+         headers:
+            Content-Type: "application/json"
+
