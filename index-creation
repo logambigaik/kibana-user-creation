@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  tasks:
+  - name: post to consul
+    uri:
+         url: "http://18.130.54.13:9200/{{ index1 }}"
+         user: "elastic"
+         password: "test123"
+         method: PUT
+         body: "{{ lookup('file','PUT-indexcreation.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 200
+         headers:
+            Content-Type: "application/json"
+  - name: GET index
+    uri:
+         url: "http://18.130.54.13:9200/{{ index1 }}"
+         user: "elastic"
+         password: "test123"
+         method: GET
+         body: "{{ lookup('file','GET-index.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 200
+         headers:
+            Content-Type: "application/json"
+
+  - name: user creation
+    uri:
+         url: "http://18.130.54.13:9200/_security/user/{{ user }}"
+         user: "elastic"
+         password: "test123"
+         method: POST
+         body: "{{ lookup('file','user.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 200
+         headers:
+            Content-Type: "application/json"
+
+
+
