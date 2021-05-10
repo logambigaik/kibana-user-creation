@@ -41,3 +41,37 @@ GET /my-index-000001
 ![image](https://user-images.githubusercontent.com/54719289/117569906-cc6efd00-b0bf-11eb-9b8b-20b705af8468.png)
 
 
+# Commands to automate with ansible:
+```
+GET /cluster/health
+curl -u elastic:test123 http://18.130.54.13:9200/_cluster/health
+```
+
+```
+PUT /_security/user/jacknich
+{
+  "password" : "l0ng-r4nd0m-p@ssw0rd",
+  "roles" : [ "admin", "other_role1" ],
+  "full_name" : "Jack Nicholson",
+  "email" : "jacknich@example.com",
+  "metadata" : {
+    "intelligence" : 7
+  }
+}
+
+curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/jacknich -d '
+{
+  "password" : "l0ng-r4nd0m-p@ssw0rd",
+  "roles" : [ "admin", "other_role1" ],
+  "full_name" : "Jack Nicholson",
+  "email" : "jacknich@example.com",
+  "metadata" : {
+    "intelligence" : 7
+  }
+'
+
+or 
+
+curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/archu -d '@user.json'
+
+```
