@@ -1,0 +1,15 @@
+--
+- hosts: localhost
+  tasks:
+  - name: user creation
+    uri:
+         url: "http://18.130.54.13:9200/_security/user/{{ user }}"
+         user: "elastic"
+         password: "test123"
+         method: POST
+         body: "{{ lookup('file','user.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 400
+         headers:
+            Content-Type: "application/json"
