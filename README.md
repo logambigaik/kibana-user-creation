@@ -48,6 +48,7 @@ curl -u elastic:test123 http://18.130.54.13:9200/_cluster/health
 ```
 
 ```
+# Sample USER Creation KQL:
 PUT /_security/user/jacknich
 {
   "password" : "l0ng-r4nd0m-p@ssw0rd",
@@ -59,7 +60,8 @@ PUT /_security/user/jacknich
   }
 }
 
-curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/jacknich -d '
+# Curl command to create user
+curl -H Content-type:application/json -u elastic:test123 -XPUT http://18.130.54.13:9200/_security/user/jacknich -d '
 {
   "password" : "l0ng-r4nd0m-p@ssw0rd",
   "roles" : [ "admin", "other_role1" ],
@@ -68,10 +70,71 @@ curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54
   "metadata" : {
     "intelligence" : 7
   }
+}
 '
-
-or 
-
-curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/archu -d '@user.json'
+```
+![image](https://user-images.githubusercontent.com/54719289/117687312-9446e780-b1af-11eb-8472-abd0d63128b8.png)
 
 ```
+or 
+
+# Curl Command with json for user creation
+curl -H Content-type:application/json -u elastic:test123 -X PUT http://18.130.54.13:9200/_security/user/archu -d '@user.json'
+
+```
+![image](https://user-images.githubusercontent.com/54719289/117687685-edaf1680-b1af-11eb-9ceb-aaa2030721cb.png)
+
+```
+
+# With ansible:
+
+usercreation.yml
+----------------
+
+---
+- hosts: localhost
+  tasks:
+  - name: user creation
+    uri:
+         url: http://18.130.54.13:9200/_security/user/{{ user }}
+         user: "elastic"
+         password: "test123"
+         method: PUT
+         body: "{{ lookup('file','user.json') }}"
+         body_format: json
+         return_content: yes
+         status_code: 200
+         headers:
+            Content-Type: "application/json"
+
+
+user.json:
+----------
+
+{
+  "password" : "test123",
+  "roles" : [ "admin", "other_role1" ],
+  "full_name" : "Jack Nicholson",
+  "email" : "jacknich@example.com",
+  "metadata" : {
+    "intelligence" : 7
+  }
+}
+
+
+# Command to execute:
+----------------------
+
+
+ansible-playbook -v usercreation.yml --syntax-check
+ansible-playbook -v usercreation.yml -e user="ganesh"
+```
+![image](https://user-images.githubusercontent.com/54719289/117688135-69a95e80-b1b0-11eb-884b-66b50fd18e48.png)
+
+
+
+
+
+
+
+
