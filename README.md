@@ -22,18 +22,18 @@ PUT /my-index-000001
     "number_of_replicas": 2
   }
 }
-'''
+```
 
 #Sample GET method
 
-'''
+```
 GET /my-index-000001
 {
   "query": {
     "match_all": {}
   }
 }
-'''
+```
 # in ec2-linux command prompt :
 
 ![image](https://user-images.githubusercontent.com/54719289/117569875-97fb4100-b0bf-11eb-99e8-6ba8d7b5ad64.png)
